@@ -1,0 +1,42 @@
+# build spark <http://spark.apache.org/docs/latest/building-with-maven.html>
+mvn -Pyarn -Phadoop-2.4 -Dhadoop.version=2.4.0 -DskipTests clean package
+
+## require
+1) maven
+
+2) scala
+
+
+# build hadoop <http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html>
+mvn package -Pdist,native -DskipTests -Dtar
+
+## require
+1) JDK1.7 +
+
+2) Maven
+
+3) ProtocolBuffer 2.5.0
+
+4) CMake
+
+5) Findbugs
+
+6) libssl-dev 
+
+7) ant
+
+
+相关的编译命令还有：
+
+1) mvn package -Pdist -DskipTests -Dtar
+
+2) mvn package -Pdist,native,docs,src -DskipTests -Dtar
+
+3) mvn package -Psrc -DskipTests
+
+4) mvn package -Pdist,native,docs -DskipTests -Dtar
+
+5) mvn clean site; mvn site:stage -DstagingDirectory=/tmp/hadoop-site 
+
+编译成功:Hadoop二进制安装包hadoop-2.4.0.tar.gz位于源代码的hadoop-dist/target子目录
+

@@ -1,0 +1,12 @@
+# IDE
+Eclipse Standard/SDK
+
+Version: Kepler Service Release 2
+
+
+
+# install plugin
+plugin site: http://download.scala-ide.org/sdk/helium/e38/scala211/stable/site # <http://scala-ide.org/download/current.html>
+
+# export to jar
+# <http://blog.csdn.net/cklsoft/article/details/25568621>

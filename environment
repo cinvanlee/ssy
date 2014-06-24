@@ -1,0 +1,24 @@
+PATH="/usr/local/findbugs/bin:/usr/local/ant/bin:/home/cinvan/spark/hadoop/bin:/home/cinvan/spark/spark/bin:/usr/local/maven/bin://usr/local/sbt/bin:/usr/local/scala/bin:/usr/local/redis:/usr/local/mysql:/usr/local/php/bin:/usr/local/jdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+
+CLASSPATH="/usr/local/jdk/lib"
+
+JAVA_HOME="/usr/local/jdk"
+
+MAVEN_HOME="/usr/local/maven"
+
+SCALA_HOME="/usr/local/scala"
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+#export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
+
+# upper is for build
+
+
+
+# for startup
+export HADOOP_CONF_DIR=/home/cinvan/spark/hadoop/etc/hadoop
+
+export HADOOP_PREFIX=/home/cinvan/spark/hadoop
+
+export HADOOP_YARN_HOME=/home/cinvan/spark/hadoop

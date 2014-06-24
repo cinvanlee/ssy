@@ -1,0 +1,29 @@
+所有第一步必须先检查命令（特别是运行的class)
+# safemode (节点block丢失：默认0.999）导致app不能运行
+hdfs dfsadmin -safemode leave
+
+# 用户验证失败（异常） ERROR UserGroupInformation: PriviledgedActionException as:www (auth:SIMPLE) cause:java.lang.ClassNotFoundException: org.apache.spark.examples.SparkPageRanke Exception in thread "main" java.lang.reflect.UndeclaredThrowableException
+
+1. Are any hosts excluded with the dfs.hosts.exclude setting in hdfs-site.xml or hdfs-default.xml? If so, don't exclude any hosts.
+2. Are the datanodes listed in conf/slaves? if not, list all datanode hostnames or IP addresses in your conf/slaves file, one per line.
+3. Does the core-site.xml on datanodes have the fs.defaultFS set to the namenode URI?
+4. Is enough disk free space available on datanodes?
+5. Is the dfs.blocksize set to a non-negative value?
+
+1）Add user to  dfs.block.local-path-access.user
+2）Disable short-circuit reads ( not recommended if hawq is enabled in cluster )
+3）Disable short-circuit reads per job with argument "-Ddfs.client.read.shortcircuit=false"
+
+* 由于非正常更新hadoop，没有格式化namenode,格式化datanode
+
+
+# File /lixinyuan/input/access.log-20140623._COPYING_ could only be replicated to 0 nodes instead of minReplication (=1).  There are 0 datanode(s) running and no node(s) are excluded in this operation.
+
+datanode 启动失败
+
+
+# 调试
+export HADOOP_ROOT_LOGGER=DEBUG,console
+执行命令后会有有DEBUG信息
+
+

@@ -1,0 +1,84 @@
+# hadoop startup
+
+1) $HADOOP_PREFIX/bin/hdfs namenode -format <cluster_name>
+
+2) scp -r $HADOOP_PREFIX datanode:$HADOOP_PREFIX
+
+3) $HADOOP_PREFIX/sbin/start-all.sh  ## will run start-dfs.sh && start-yarn.sh
+
+## test
+4) hdfs dfs -mkdir -p /dirname
+
+5) hdfs dfs -put localfile /dirname
+
+### demo
+6) hadoop jar example.jar classname /inputdirname /outputdirname
+
+
+
+
+# spark startup
+
+## Interactive <http://spark.apache.org/docs/latest/quick-start.html>
+1) ./bin/spark-shell
+
+## Standalone <http://spark.apache.org/docs/latest/spark-standalone.html>
+1) ./sbin/start-master.sh    # start master
+
+2) ./bin/spark-shell --master spark://IP:PORT # shell
+
+3) ./bin/spark-class org.apache.spark.deploy.worker.Worker spark://IP:PORT  # run class
+
+## on YARN <http://spark.apache.org/docs/latest/running-on-yarn.html>
+1) ./sbin/start-all.sh
+
+2) ./bin/spark-submit --class path.to.your.Class --master yarn-cluster [options] <app jar> [app options] # ./bin/spark-submit --class org.apache.spark.examples.JavaWordCount --master yarn-cluster --jars lib/spark-examples*.jar userhome/lixinyuan/wordcount.jar hdfs://shnh-app024/lixinyuan/input/access.log-20140619
+
+
+
+
+Hadoop Startup
+
+To start a Hadoop cluster you will need to start both the HDFS and YARN cluster.
+
+Format a new distributed filesystem:
+
+$ $HADOOP_PREFIX/bin/hdfs namenode -format <cluster_name>
+Start the HDFS with the following command, run on the designated NameNode:
+
+$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode
+Run a script to start DataNodes on all slaves:
+
+$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
+Start the YARN with the following command, run on the designated ResourceManager:
+
+$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh --config $HADOOP_CONF_DIR start resourcemanager
+Run a script to start NodeManagers on all slaves:
+
+$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh --config $HADOOP_CONF_DIR start nodemanager
+Start a standalone WebAppProxy server. If multiple servers are used with load balancing it should be run on each of them:
+
+$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh start proxyserver --config $HADOOP_CONF_DIR
+Start the MapReduce JobHistory Server with the following command, run on the designated server:
+
+$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_CONF_DIR
+Hadoop Shutdown
+
+Stop the NameNode with the following command, run on the designated NameNode:
+
+$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs stop namenode
+Run a script to stop DataNodes on all slaves:
+
+$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs stop datanode
+Stop the ResourceManager with the following command, run on the designated ResourceManager:
+
+$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh --config $HADOOP_CONF_DIR stop resourcemanager
+Run a script to stop NodeManagers on all slaves:
+
+$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh --config $HADOOP_CONF_DIR stop nodemanager
+Stop the WebAppProxy server. If multiple servers are used with load balancing it should be run on each of them:
+
+$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh stop proxyserver --config $HADOOP_CONF_DIR
+Stop the MapReduce JobHistory Server with the following command, run on the designated server:
+
+$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh stop historyserver --config $HADOOP_CONF_DIR
