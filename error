@@ -27,3 +27,7 @@ export HADOOP_ROOT_LOGGER=DEBUG,console
 执行命令后会有有DEBUG信息
 
 
+# Memory
+ERROR UserGroupInformation: PriviledgedActionException as:www (auth:SIMPLE) cause:org.apache.hadoop.yarn.exceptions.InvalidResourceRequestException: Invalid resource request, requested memory < 0, or requested memory > max configured, requestedMemory=8576, maxMemory=819
+请求内存过大
+
