@@ -31,3 +31,6 @@ export HADOOP_ROOT_LOGGER=DEBUG,console
 ERROR UserGroupInformation: PriviledgedActionException as:www (auth:SIMPLE) cause:org.apache.hadoop.yarn.exceptions.InvalidResourceRequestException: Invalid resource request, requested memory < 0, or requested memory > max configured, requestedMemory=8576, maxMemory=819
 请求内存过大
 
+# Caused by: java.net.ConnectException: Call From xuxy/192.168.11.231 to lixinyuan:8020 failed on connection exception: java.net.ConnectException: Connection refused; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+
+有可能是执行命令的hdfs端口错误，spark默认请求8020端口，连接hdfs
