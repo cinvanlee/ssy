@@ -3,6 +3,8 @@ $ ./bin/shark -e "SELECT * FROM foo"     # Run a specific query and exit
 $ ./bin/shark -i queries.hql             # Run queries from a file
 $ ./bin/shark -H                         # Start CLI and print help
 
+bin/shark-withdebug: Runs Shark CLI with DEBUG level logs printed to the console.
+bin/shark-withinfo: Runs Shark CLI with INFO level logs printed to the console.
 
 To start a SharkServer, run
 $./bin/shark --service sharkserver <port>
