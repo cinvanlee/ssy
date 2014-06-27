@@ -1,0 +1,8 @@
+./hive -hiveconf hive.root.logger=DEBUG,console
+
+
+
+
+# FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. MetaException(message:javax.jdo.JDODataStoreException: An exception was thrown while adding/validating class(es) : Specified key was too long; max key length is 767 bytes
+mysql db charset error
+alter database hivedb character set latin1;

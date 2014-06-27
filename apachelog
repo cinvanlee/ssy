@@ -1,0 +1,41 @@
+192.168.3.200 - - [23/Mar/2014:21:03:03 +0800] "GET /phpMyAdmin/js/get_scripts.js.php?token=730e2ea15bcff5712944a0222aa80195&scripts[]=jquery/jquery-1.8.3.min.js&scripts[]=ajax.js&scripts[]=keyhandler.js&scripts[]=jquery/jquery-ui-1.9.2.custom.min.js&scripts[]=jquery/jquery.sprintf.js&scripts[]=jquery/jquery.cookie.js&scripts[]=jquery/jquery.mousewheel.js&scripts[]=jquery/jquery.event.drag-2.2.js&scripts[]=jquery/jquery-ui-timepicker-addon.js&scripts[]=jquery/jquery.ba-hashchange-1.3.js&scripts[]=jquery/jquery.debounce-1.0.5.js&scripts[]=jquery/jquery.menuResizer-1.0.js&scripts[]=cross_framing_protection.js&scripts[]=rte.js&scripts[]=tracekit/tracekit.js&scripts[]=error_report.js&scripts[]=doclinks.js&scripts[]=functions.js&scripts[]=navigation.js&scripts[]=indexes.js&scripts[]=common.js&scripts[]=codemirror/lib/codemirror.js&scripts[]=codemirror/mode/sql/sql.js&scripts[]=codemirror/addon/runmode/runmode.js HTTP/1.1" 200 1038689
+
+组合格式的日志文件比通用格式的日志文件多了两条请求头中包含的信息，其他部分完全一样，以组合格式的日志文件为例，日志中的每项代表的含义如下(详细信息参见Apache文档)：
+
+客户端的IP地址。
+由客户端identd进程判断的RFC1413身份(identity),输出中的符号"-"表示此处的信息无效。
+HTTP认证系统得到的访问该网页的客户标识(userid),如果网页没有设置密码保护，则此项将是"-"。
+服务器完成请求处理时的时间。
+客户的动作\请求的资源\使用的协议。
+服务器返回给客户端的状态码。
+返回给客户端的不包括响应头的字节数.如果没有信息返回，则此项应该是"-"。
+"Referer"请求头。
+"User-Agent"请求头。
+用来提取信息的正则表达式组成：
+
+最终的表达式如下：
+
+^([0-9.]+)\s([\w.-]+)\s([\w.-]+)\s(\[[^\[\]]+\])\s"((?:[^"]|\")+)"\s(\d)\s(\d+|-)\s"((?:[^"]|\")+)"\s"((?:[^"]|\")+)"$
+
+^:匹配每一行的开头。
+([0-9.]+)\s:匹配IP地址。
+([\w.-]+)\s:匹配identity，由数字字母下划线或点分隔符组成。
+([\w.-]+)\s:匹配userid，由数字字母下划线或点分隔符组成。
+(\[[^\[\]]+\])\s:匹配时间。
+"((?:[^"]|\")+)"\s:匹配请求信息，双引号中可能出现转义的双引号\"。
+(\d)\s:匹配状态码。
+(\d+|-)\s:匹配响应字节数或-。
+"((?:[^"]|\")+)"\s:匹配"Referer"请求头，双引号中可能出现转义的双引号\"。
+"((?:[^"]|\")+)":匹配"User-Agent"请求头，双引号中可能出现转义的双引号\"。
+$:匹配行尾。
+
+CREATE TABLE apachelog (ipaddress STRING, identd STRING, user STRING,finishtime STRING,requestline string, returncode INT, size INT,referer string,agent string) ROW FORMAT SERDE 'org.apache.Hadoop.hive.serde2.dynamic_type.DynamicSerDe'WITH SERDEPROPERTIES ('serialization.format'='org.apache.hadoop.hive.serde2.thrift.TCTLSeparatedProtocol','quote.delim'='("|\\[|\\])','field.delim'=' ','serialization.null.format'='-')STORED AS TEXTFILE;  
+
+CREATE TABLE apachelog (ipaddress STRING,identity STRING,user STRING,time STRING,request STRING,protocol STRING,status STRING,size STRING,referer STRING,agent STRING) ROW FORMAT SERDE 'org.apache.hadoop.hive.contrib.serde2.RegexSerDe' WITH SERDEPROPERTIES ("input.regex" = "([^ ]*) ([^ ]*) ([^ ]*) (-|\\[[^\\]]*\\]) ([^ \"]*|\"[^\"]*) ([^ ]*\") (-|[0-9]*) (-|[0-9]*)(?: ([^ \"]*|\".*\") ([^ \"]*|\".*\"))?","output.format.string" = "%1$s %2$s %3$s %4$s %5$s %6$s %7$s %8$s %9$s %10$s")STORED AS TEXTFILE;  
+
+LOAD DATA [LOCAL] INPATH '/test/input/www.5iguazi.com-access_log' OVERWRITE INTO TABLE apachelog;
+LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename;
+
+关键字[OVERWRITE]意思是是覆盖原表里的数据，不写则不会覆盖。
+关键字[LOCAL]是指你加载文件的来源为本地文件，不写则为hdfs的文件。
+其中

@@ -1,0 +1,11 @@
+$ ./bin/shark                            # Start CLI for interactive session
+$ ./bin/shark -e "SELECT * FROM foo"     # Run a specific query and exit
+$ ./bin/shark -i queries.hql             # Run queries from a file
+$ ./bin/shark -H                         # Start CLI and print help
+
+
+To start a SharkServer, run
+$./bin/shark --service sharkserver <port>
+
+A client can connect to the server using
+$./bin/shark -h <server-host> -p <server-port>
