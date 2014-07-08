@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+<property>
+  <name>fs.defaultFS</name>
+  <value>hdfs://lixinyuan:9001</value>
+</property>
+
+<property>
+  <name>mapred.job.tracher</name>
+  <value></value>
+</property> 
+
+<property>
+  <name>mapreduce.framework.name</name>
+  <value></value>
+</property>
+ 
+<property>
+  <name>hive.metastore.local</name>
+  <value>true</value>
+</property>
+ 
+<property>
+  <name>javax.jdo.option.ConnectionURL</name>
+  <value>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true</value>
+</property>
+ 
+<property>
+  <name>javax.jdo.option.ConnectionDriverName</name>
+  <value>com.mysql.jdbc.Driver</value>
+</property>
+ 
+<property>
+  <name>javax.jdo.option.ConnectionUserName</name>
+  <value>hive</value>
+</property>
+ 
+<property>
+  <name>javax.jdo.option.ConnectionPassword</name>
+  <value>hive</value>
+</property>
+<property>
+  <name>datanucleus.fixedDatastore</name>
+  <value>false</value>
+</property>
+ 
+</configuration>
