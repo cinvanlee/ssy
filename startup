@@ -82,3 +82,11 @@ $ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh stop proxyserver --config $HADOOP_CONF_D
 Stop the MapReduce JobHistory Server with the following command, run on the designated server:
 
 $ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh stop historyserver --config $HADOOP_CONF_DIR
+
+# shark startup
+## startup server
+bin/shark --service sharkserver 8021 >/home/spark/log/shark.log 2>&1 &
+
+## startup client
+bin/shark -h lixinyuan -p 8021
+
