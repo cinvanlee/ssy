@@ -1,0 +1,9 @@
+#!/bin/bash
+code_src=/home/cinvan/workspace/hf-code/
+code_remote=www@dev1:/data1/www/dev_cloud/lixinyuan
+inotifywait -mrq --timefmt '%Y%m%d-%H:%M' --format  '%T %e %w%f' -e modify,move,create,delete  ${code_src} \
+| while read file
+do
+	rsync -avHP --exclude=".git" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" --exclude=".idea" -e 'ssh' ${code_src} ${code_remote} > /dev/null 2>&1
+done
+# rsync -avHP --exclude=".git" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" -e 'ssh' /home/cinvan/workspace/hf-code/ www@dev1:/data1/www/dev_cloud/lixinyuan

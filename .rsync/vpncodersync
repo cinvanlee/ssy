@@ -1,0 +1,9 @@
+#!/bin/bash
+code_src=/home/cinvan/workspace/vpn-hf-code/
+code_remote=www@dev:/data1/www/dev_cloud/cinvan
+inotifywait -mrq --timefmt '%Y%m%d-%H:%M' --format  '%T %e %w%f' -e modify,attrib,move,close_write,create,delete,delete_self  ${code_src} \
+| while read file
+do
+	rsync -avHP --exclude=".idea" --exclude=".git" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" -e 'ssh' ${code_src} ${code_remote} > /dev/null 2>&1
+done
+# rsync -avHP --exclude=".git" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" -e 'ssh' /home/cinvan/workspace/hf-code/ www@dev:/data1/www/dev_cloud/lixinyuan

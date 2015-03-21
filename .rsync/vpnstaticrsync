@@ -1,0 +1,9 @@
+#!/bin/bash
+static_src=/home/cinvan/workspace/vpn-hf-static/
+static_remote=www@dev1:/data1/www/static_cloud/cinvan
+inotifywait -mrq --timefmt '%Y%m%d-%H:%M' --format  '%T %e %w%f' -e modify,attrib,move,close_write,create,delete,delete_self  ${static_src} \
+| while read file
+do
+	rsync -avHP --exclude=".git" --exclude=".idea" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" -e 'ssh' ${static_src} ${static_remote} > /dev/null 2>&1
+done
+# rsync -avHP --exclude=".git" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" -e 'ssh' /home/cinvan/workspace/hf-static/ www@dev1:/data1/www/dev_cloud/lixinyuan

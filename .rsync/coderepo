@@ -1,0 +1,26 @@
+#!/bin/bash
+git clone http://git.ipo.com/hf-dev-1/app-trade-hfb.git
+git clone http://git.ipo.com/hf-dev-1/app-trade-hfd.git
+git clone http://git.ipo.com/hf-dev-1/app-trade-base.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-base.git
+git clone http://git.ipo.com/hf-dev-1/app-render.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-www.git
+git clone http://git.ipo.com/hf-dev-1/system.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-xf.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-member.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-manage.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-api.git
+git clone http://git.ipo.com/hf-dev-1/app-service.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-ypz.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-hkagent.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-paycenter.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-steward.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-hgj.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-resource.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-permission.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-bis.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-esf.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-zf.git
+git clone http://git.ipo.com/hf-dev-1/app-hotline.git
+git clone http://git.ipo.com/hf-dev-1/app-hf-gold.git
+git clone http://git.ipo.com/hf-dev-1/app-shorturl.git

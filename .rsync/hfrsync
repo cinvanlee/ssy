@@ -1,0 +1,5 @@
+#!/bin/bash
+#/home/cinvan/.rsync/hfcodersync &
+#/home/cinvan/.rsync/hfstaticrsync &
+rsync -avHP --exclude=".git" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" -e 'ssh' /home/cinvan/workspace/hf-code/ www@dev1:/data1/www/dev_cloud/lixinyuan
+rsync -avHP --exclude=".git" --exclude=".gitignore" --exclude=".buildpath" --exclude=".project" --exclude=".settings" -e 'ssh' /home/cinvan/workspace/hf-static/ www@dev1:/data1/www/static_cloud/lixinyuan
